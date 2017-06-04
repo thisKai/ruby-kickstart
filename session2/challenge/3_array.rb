@@ -7,5 +7,11 @@
 
 class String
   def every_other_char
+    return "" if self == ""
+    output = ""
+    self.chars.each_slice(2) do |a, b|
+      output << a
+    end
+    output
   end
 end
