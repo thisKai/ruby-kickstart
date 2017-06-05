@@ -24,7 +24,15 @@
 # USER:     BYE
 
 def deaf_grandma
-
+  while line = gets
+    input = line.chomp
+    break if input == "BYE"
+    if input.length > 0 && input == input.upcase
+      puts "NO, NOT SINCE 1938!"
+    else
+      puts "HUH?! SPEAK UP, SONNY!"
+    end
+  end
 end
 
 
