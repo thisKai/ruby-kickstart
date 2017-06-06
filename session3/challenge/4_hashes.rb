@@ -5,3 +5,15 @@
 # There will be no punctuation in the strings.
 #
 # first_pos "The dog and the cat and the cow" # => {"The" => 0, "dog" => 1, "and" => 2, "the" => 3, "cat" => 4, "cow" => 7}
+
+def first_pos(sentence)
+  output = Hash.new
+
+  sentence.split(' ').each_with_index do |word, index|
+    if !output.include? word
+      output[word] = index
+    end
+  end
+
+  output
+end
