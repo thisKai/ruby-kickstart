@@ -8,3 +8,10 @@
 # staircase 4  # => {1 => [], 3 => [2]}
 # staircase 5  # => {1 => [], 3 => [2], 5 =>[2, 4]}
 
+def staircase(num)
+  output = {}
+  (1..num).each_slice(2) do |a,b|
+    output[a] = Array(1..a).reject { |n| n.odd? }
+  end
+  output
+end
