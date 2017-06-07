@@ -29,4 +29,19 @@
 # shared [1,2,3], [3,2,1]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, true]}, [1, 2, 3]]
 
 def shared(a, b)
+  element_occurences = {}
+  a.each do |val|
+    element_occurences[val] = [true, nil]
+  end
+  b.each do |val|
+    if element_occurences.include? val
+      element_occurences[val][1] = true
+    else
+      element_occurences[val] = [nil, true]
+    end
+  end
+  elements_in_both = element_occurences.select do |value,occurence|
+    occurence[0] && occurence[1]
+  end.keys
+  [element_occurences,  elements_in_both]
 end
