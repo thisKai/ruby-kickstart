@@ -17,3 +17,18 @@
 # match_maker true,  true,  true, true, nil     # => [false, true]
 # match_maker true,  true,  true, 0, nil        # => [false, true]
 
+def match_maker(oppositely_truthey, *values)
+  slices = []
+  values.each_slice(2) do |a,b|
+    slices << [a,b]
+  end
+  slices.map! do |slice|
+    a = slice[0]
+    b = slice[1]
+    if oppositely_truthey
+      !!a ^ !!b
+    else
+      !!a == !!b
+    end
+  end
+end
