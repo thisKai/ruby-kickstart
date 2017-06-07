@@ -30,11 +30,16 @@ class HTMLTag
     :sans_serif => '"Arial", "Verdana"',
     :monospace  => '"Courier New", "Lucida Console"'
   }
+  COLORS = {
+    :red => '#FF0000',
+    :green => '#00FF00',
+    :blue => '#0000FF'
+  }
 
   attr_accessor :name, :innerHTML, :options
 
   # options: :multiline should be true or false
-  def initialize(name, innerHTML, options)
+  def initialize(name, innerHTML, options = Hash.new)
     @name, @innerHTML, @options = name, innerHTML, options
   end
 
@@ -43,9 +48,18 @@ class HTMLTag
     FONTS[font]
   end
 
+  def color
+    color = options[:color]
+    COLORS[color]
+  end
+
   def style
-    return nil unless options[:font]
-    "style='font-family:#{font}'"
+    props = {}
+    props['font-family'] = font if options[:font]
+    props['color'] = color if options[:color]
+    return nil if props.empty?
+
+    "style='#{props.map { |name,val| "#{name}:#{val};" }.join}'"
   end
 
   def to_s
