@@ -52,5 +52,41 @@
 #   end
 # end       # => ["a", "m", "r", 1, 3, 4, 9, 2.5, 9.0, 25.8]
 
-def your_sort
+# def your_sort(list, &block)
+#   compare = block ? block : Proc.new { |a, b| a <=> b }
+#   list.each_index do |i|
+#     min_index = i
+#     list[i...list.length-1].each_with_index do |item, index|
+#       # if compare.call(item, list[min_index]) == 1
+#       if item < list[min_index]
+#         min_index = index
+#       end
+#     end
+#     if min_index != i
+#       list[i], list[min_index] = list[min_index], list[i]
+#     end
+#   end
+#   list
+# end
+def your_sort(list, &block)
+  compare = block ? block : Proc.new { |a, b| a <=> b }
+  unsorted = list.clone
+  sorted = []
+  # find the smallese item in the unsorted list
+  while !unsorted.empty?
+    smallest = nil
+    unsorted.each_with_index do |item, index|
+      if !smallest || (compare.call(item, smallest[:item])) == -1
+        smallest = {
+          :index => index,
+          :item => item,
+        }
+      end
+    end
+    sorted << smallest[:item]
+    unsorted.delete_at smallest[:index]
+  end
+  sorted
 end
+
+your_sort([3,7,8,345,90,24,1])
