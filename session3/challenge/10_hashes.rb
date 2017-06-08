@@ -28,6 +28,23 @@
 #
 # create it from scratch :)
 
+def flatten_path_hash(dir, contents)
+  path_hash = {}
+  contents.each do |sub_dir, sub_contents|
+    path_hash["#{dir}/#{sub_dir}"] = sub_contents
+  end
+  path_hash
+end
 
-def pathify
+def pathify(path_hash = Hash.new)
+  return [] if path_hash.empty?
+
+  path_hash.map do |dir, contents|
+    if contents.is_a? Hash
+      new_path_hash = flatten_path_hash dir, contents
+      pathify new_path_hash
+    elsif contents.is_a? Array
+      contents.map { |file_name| "/#{dir}/#{file_name}" }
+    end
+  end.flatten
 end
