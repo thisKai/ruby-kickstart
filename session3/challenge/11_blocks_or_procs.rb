@@ -30,5 +30,14 @@
 # end
 
 
-def array_init
+def array_init(length = 5, &block)
+  if block
+    arr = []
+    length.times do |index|
+      arr << (block.call index)
+    end
+    arr
+  else
+    array_init(length) { |item| (item * 100).to_s }
+  end
 end
