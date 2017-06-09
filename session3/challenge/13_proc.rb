@@ -73,7 +73,7 @@ def your_sort(list, &block)
   unsorted = list.clone
   sorted = []
   # find the smallese item in the unsorted list
-  while !unsorted.empty?
+  until unsorted.empty?
     smallest = nil
     unsorted.each_with_index do |item, index|
       if !smallest || (compare.call(item, smallest[:item])) == -1

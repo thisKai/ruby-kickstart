@@ -43,7 +43,7 @@ def ll_length(linked_list)
   length = 0
   head = linked_list
 
-  while !head.nil?
+  until head.nil?
     length += 1
     head = head[:next]
   end

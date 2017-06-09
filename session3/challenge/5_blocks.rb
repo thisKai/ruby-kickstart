@@ -44,7 +44,7 @@ def spiral_access(square_array, &block)
     row[1..row.length-2]
   end
 
-  if !new_square.empty?
+  unless new_square.empty?
     # call this function again on the inner square
     spiral_access new_square, &block
   end

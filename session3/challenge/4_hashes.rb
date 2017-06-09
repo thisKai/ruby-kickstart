@@ -10,7 +10,7 @@ def first_pos(sentence)
   output = Hash.new
 
   sentence.split(' ').each_with_index do |word, index|
-    if !output.include? word
+    unless output.include? word
       output[word] = index
     end
   end

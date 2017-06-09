@@ -18,7 +18,7 @@
 def print_list(linked_list)
   head = linked_list
 
-  while !head.nil?
+  until head.nil?
     puts head[:data]
     head = head[:next]
   end
