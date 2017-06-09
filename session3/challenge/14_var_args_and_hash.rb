@@ -21,11 +21,30 @@
 # problem_14 2,   5, 6, 45, 99, 13, 5, 6,  :problem => :same_ends    # => true
 # problem_14 3,   5, 6, 45, 99, 13, 5, 6,  :problem => :same_ends    # => false
 
-def problem_14
+def problem_14(*items, **options)
+  problem = (options.is_a? Hash) ? options[:problem] : :count_clumps
+  if problem == :same_ends
+    same_ends *items
+  else
+    count_clumps *items
+  end
 end
 
-def same_ends
+def same_ends(n, *items)
+  items[0...n] == items[-n, n]
 end
 
-def count_clumps
+def count_clumps(*items)
+  clumps = []
+  last_item = nil
+
+  items.each do |item|
+    if item == last_item
+      clumps[clumps.length-1] += 1
+    else
+      clumps << 1
+    end
+    last_item = item
+  end
+  clumps.select { |item| item > 1 }.length
 end
