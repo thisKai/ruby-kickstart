@@ -38,3 +38,25 @@
 # middle head                        # => 3
 # head = {:data => 6, :next => head}
 # middle head                        # => 3
+
+def ll_length(linked_list)
+  length = 0
+  head = linked_list
+
+  while !head.nil?
+    length += 1
+    head = head[:next]
+  end
+  length
+end
+
+def middle(linked_list)
+  head = linked_list
+  length = ll_length(linked_list)
+  halfway = length / 2
+
+  halfway.times do
+    head = head[:next]
+  end
+  head[:data]
+end
