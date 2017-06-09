@@ -7,3 +7,14 @@
 #
 # print_list_in_reverse head   # >> "1\n2\n"
 
+def print_list_in_reverse(linked_list)
+  head = linked_list
+  list_items = []
+
+  until head.nil?
+    list_items << head[:data]
+    head = head[:next]
+  end
+
+  puts list_items.reverse
+end
